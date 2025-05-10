@@ -1,20 +1,14 @@
-// src/pages/DoctorsPage/DoctorsPage.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchDoctors } from '../api/doctorApi';
 import DoctorCard from '../components/DoctorCard';
 import Filters from '../components/Filters';
 import Pagination from '../components/Pagination';
-//import AddDoctorForm from '../components/AddDoctorForm';
-//import './DoctorsPage.css';
-
 const DoctorsPage = () => {
   const { speciality } = useParams();
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  //const [showAddForm, setShowAddForm] = useState(false);
-  
   const [filters, setFilters] = useState({
     location: '',
     experience: '',
@@ -69,21 +63,7 @@ const DoctorsPage = () => {
     <div className="doctors-page">
       <h1>{speciality || 'All'} Doctors</h1>
       
-      {/* <button 
-        className="add-doctor-btn"
-        onClick={() => setShowAddForm(!showAddForm)}
-      >
-        {showAddForm ? 'Cancel' : 'Add New Doctor'}
-      </button>
-
-      {showAddForm && (
-        <AddDoctorForm 
-          onSubmit={handleAddDoctor} 
-          specialties={['General Physician', 'Cardiologist', 'Dermatologist']} 
-        />
-      )} */}
-
-      <div className="content-container">
+       <div className="content-container">
         <Filters 
           filters={filters} 
           onChange={handleFilterChange} 

@@ -6,18 +6,22 @@ const AddDoctorForm = () => {
     name:'',speciality:'',experience:'',location:'',price:'',imageUrl:'',about:'',rating:''
   })
   const navigate=useNavigate()
-  function changeHandler(event){
-    setFormData((prevFormData)=>(
-      {
-        ...prevFormData,[event.target.name]:event.target.value
-      }
-    ))
+  
+  function changeHandler(event) {
+  if (event.target.type === 'file') {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [event.target.name]: event.target.files[0],
+    }));
+  } else {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [event.target.name]: event.target.value,
+    }));
   }
-  // //function submitHandler(event){
-  //   event.preventDefault()
-  //   console.log(formData)
-  // }
-  async function submitHandler(event) {
+}
+
+async function submitHandler(event) {
   event.preventDefault();
   try {
     const response = await createDoctor(formData);
@@ -28,14 +32,14 @@ const AddDoctorForm = () => {
       experience: '',
       location: '',
       price: '',
-      imageUrl: '',
+      imageFile: '',
       about: '',
       rating:''
     });
   } catch (error) {
     console.error(error);
   }
-  navigate('/doctors')
+  navigate('/specialties/general-physician')
 }
 
 
@@ -66,7 +70,7 @@ const AddDoctorForm = () => {
         </div>
         <div className='form-group'>
           <label htmlFor="imageUrl">Enter ImageUrl:</label>
-          <input type="text" id='imageUrl' name="imageUrl" onChange={changeHandler} value={formData.imageUrl}/>
+          <input type="file" id='imageUrl' name="imageFile" onChange={changeHandler}/>
         </div>
         <div className='form-group'>
           <label htmlFor="about">About:</label>

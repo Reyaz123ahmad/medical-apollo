@@ -13,15 +13,20 @@ export const fetchDoctors = async (filters = {}, page = 1, limit = 10) => {
   return await response.json();
 };
 
+
+
+
 export const createDoctor = async (doctorData) => {
+  const formData = new FormData();
+  Object.keys(doctorData).forEach((key) => {
+    formData.append(key, doctorData[key]);
+  });
   const response = await fetch(`${API_BASE}/doctor/create`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${localStorage.getItem('token')}`
-    },
-    body: JSON.stringify(doctorData)
+    body: formData,
   });
   if (!response.ok) throw new Error('Failed to add doctor');
   return await response.json();
 };
+
+

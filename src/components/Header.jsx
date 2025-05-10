@@ -31,14 +31,14 @@ const Header = () => {
               Doctors
             </NavLink>
             <NavLink 
-              to="/#" 
+              to="/jh" 
               className="navList"
               onClick={() => setIsMenuOpen(false)}
             >
               Pharmacy
             </NavLink>
             <NavLink 
-              to="/jh" 
+              to="/jhjj" 
               className="navList"
               onClick={() => setIsMenuOpen(false)}
             >
